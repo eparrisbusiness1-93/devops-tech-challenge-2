@@ -118,3 +118,13 @@ resource "aws_instance" "jenkins" {
 output "jenkins_public_ip" {
   value = "http://${aws_instance.jenkins.public_ip}:8080"
 }
+
+resource "aws_security_group_rule" "jenkins_to_eks_api" {
+  type                     = "ingress"
+  from_port                = 443
+  to_port                  = 443
+  protocol                 = "tcp"
+  security_group_id        = module.eks.cluster_security_group_id
+  source_security_group_id = aws_security_group.jenkins_sg.id
+  description              = "Allow Jenkins EC2 instance to access EKS API server"
+}
