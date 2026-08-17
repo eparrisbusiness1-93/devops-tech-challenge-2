@@ -47,6 +47,7 @@ pipeline {
         stage('Deploy to EKS via Helm') {
             steps {
                 sh """
+                aws eks update-kubeconfig --region us-east-2 --name tech-challenge-eks
                 helm upgrade --install hello-world-release ./helm \
                   --set image.repository=${ECR_REPO_URL} \
                   --set image.tag=${BUILD_NUMBER}
