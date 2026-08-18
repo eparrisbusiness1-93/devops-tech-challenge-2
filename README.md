@@ -33,10 +33,13 @@ This repository contains an end-to-end DevOps pipeline that provisions AWS infra
 * **ECR Push**: Authenticates and pushes container image to AWS ECR.
 * **EKS Deploy**: Updates local `kubeconfig` (`aws eks update-kubeconfig`) and executes `helm upgrade --install` to deploy/update application pods.
 
-### Phase 6: Validation & Documentation
+### Phase 6: Validation, Documentation & Teardown
 * Verified running pods (`kubectl get pods`) and LoadBalancer service health (`kubectl get svc`).
-* confirmed successful HTTP response (`Hello, World!`) via AWS Classic LoadBalancer.
-* Validated tear-down procedures via `terraform destroy`.
+* Confirmed successful HTTP response (`Hello, World!`) via AWS Classic LoadBalancer.
+* **Troubleshooting & Fixes**:
+  * **Git Push Rejection**: Resolved remote commit divergence using `git pull origin main --rebase` before completing final submission.
+  * **Teardown Dependency Lock (`DependencyViolation`)**: Uninstalled the Helm release (or manually deleted the orphaned AWS Classic LoadBalancer) to detach active Elastic Network Interfaces (ENIs) blocking VPC and subnet deletion.
+  * **ECR Deletion Failure (`RepositoryNotEmptyException`)**: Added `force_delete = true` to `aws_ecr_repository` in `ecr.tf` to allow Terraform to purge stored container images during `terraform destroy`.
 
 ---
 
