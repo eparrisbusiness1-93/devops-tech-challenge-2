@@ -5,7 +5,7 @@ metadata:
   labels:
     app: {{ .Release.Name }}
 spec:
- strategy:
+  strategy:
     type: Recreate
   replicas: {{ .Values.replicaCount }}
   selector:
