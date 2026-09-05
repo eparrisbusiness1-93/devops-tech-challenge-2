@@ -8,7 +8,7 @@ spec:
   source:
     repoURL: 'https://github.com/eparrisbusiness1-93/devops-tech-challenge-2.git'
     targetRevision: gitops
-    path: helm/hello-world-chart
+    path: helm
   destination:
     server: 'https://kubernetes.default.svc'
     namespace: default
