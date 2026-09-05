@@ -2,7 +2,7 @@ replicaCount: 1
 
 image:
   repository: 444896211196.dkr.ecr.us-east-2.amazonaws.com/hello-world-app
-  tag: "e65180757ab03fa1916702318f13eb0350404923"
+  tag: "6bffadff7e99ea486a31f5648d3d3d2b31f4c5a7"
   pullPolicy: Always
 
 service:
